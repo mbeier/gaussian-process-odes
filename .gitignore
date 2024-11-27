@@ -10,6 +10,9 @@
 **/model_predictions.npz
 **/optimization_trace.npz
 
+# data
+data
+
 # byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

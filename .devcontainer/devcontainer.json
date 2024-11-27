@@ -1,0 +1,65 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/docker-existing-dockerfile
+{
+	"name": "gpode-kegp",
+	"build": {
+		// Sets the run context to one level up instead of the .devcontainer folder.
+		"context": ".",
+		// Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
+		"dockerfile": "./Dockerfiles/Dockerfile"
+	},
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	// "features": {},
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+	// Uncomment the next line to run commands after the container is created.
+	// "postAttachCommand": "",
+	// Configure tool-specific properties.
+	"customizations": {
+		"vscode": {
+			"files.exclude": {
+				"**/__pycache__": true,
+				"**/.pytest_cache": true
+			},
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"ms-python.python",
+				"ms-python.debugpy",
+				"ms-python.black-formatter",
+				"ms-toolsai.jupyter-keymap",
+				"ms-toolsai.jupyter",
+				"ms-azuretools.vscode-docker",
+				"ms-python.vscode-pylance",
+				"njpwerner.autodocstring",
+				"tomoki1207.pdf",
+				"codeium.codeium"
+			],
+			// "python.languageServer": "pylance",
+			"python.analysis.extraPaths": [
+				"${containerWorkspaceFolder}/.venv/lib/python3.8/site-packages"
+			],
+			"python.defaultInterpreterPath": [
+				"${containerWorkspaceFolder}/.venv/lib/python3.8/site-packages"
+			],
+			"[python]": {
+				"editor.defaultFormatter": "ms-python.black-formatter",
+				"editor.formatOnSave": true,
+				"editor.formatOnPaste": false,
+				"editor.formatOnSaveMode": "file"
+			}
+		}
+	},
+	"runArgs": [
+		"--shm-size=4g",
+		"--runtime=nvidia",
+		"--gpus",
+		"all"
+	],
+	// Uncomment to connect as an existing user other than the container default. More info: https://aka.ms/dev-containers-non-root.
+	"remoteUser": "me",
+	"containerUser": "me"
+	// "mounts": [
+	// 	"type=bind,source=${localEnv:HOME}/.ssh,target=/root/.ssh,readonly"
+	// ]
+	// "remoteUser":"vscode" // or smth else
+}
