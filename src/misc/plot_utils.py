@@ -67,18 +67,18 @@ def plot_longitudinal(data, test_pred, noisevar):
     for n in range(test_pred_mean.shape[0]):
         fig, axs = plt.subplots(1, 2, figsize=(8 * 2, 3 * 1))
         for d in range(2):
-            axs[d].plot(data.tst.ts, test_pred_mean[0, :, d], c='r', alpha=0.7, zorder=3)
+            axs[d].plot(data.tst.ts, test_pred_mean[n, :, d], c='r', alpha=0.7, zorder=3)
             axs[d].fill_between(data.tst.ts,
-                                test_pred_mean[0, :, d] - 2 * test_pred_postvar[0, :, d] ** 0.5,
-                                test_pred_mean[0, :, d] + 2 * test_pred_postvar[0, :, d] ** 0.5,
+                                test_pred_mean[n, :, d] - 2 * test_pred_postvar[n, :, d] ** 0.5,
+                                test_pred_mean[n, :, d] + 2 * test_pred_postvar[n, :, d] ** 0.5,
                                 color='r', alpha=0.1, zorder=1, label="posterior")
             axs[d].fill_between(data.tst.ts,
-                                test_pred_mean[0, :, d] - 2 * test_pred_predvar[0, :, d] ** 0.5,
-                                test_pred_mean[0, :, d] + 2 * test_pred_predvar[0, :, d] ** 0.5,
+                                test_pred_mean[n, :, d] - 2 * test_pred_predvar[n, :, d] ** 0.5,
+                                test_pred_mean[n, :, d] + 2 * test_pred_predvar[n, :, d] ** 0.5,
                                 color='b', alpha=0.1, zorder=0, label="predictive")
 
-            axs[d].plot(data.tst.ts, data.tst.ys[0, :, d], c='k', alpha=0.7, zorder=2)
-            axs[d].scatter(data.trn.ts, data.trn.ys[0, :, d], c='k', s=100, marker='.', zorder=200)
+            axs[d].plot(data.tst.ts, data.tst.ys[n, :, d], c='k', alpha=0.7, zorder=2)
+            # axs[d].scatter(data.trn.ts, data.trn.ys[0, :, d], c='k', s=100, marker='.', zorder=200)
             axs[d].set_title("State {}".format(d + 1))
             axs[d].set_xlabel("Time")
             axs[d].scatter([], [], c='k', s=10, marker='.', label='train obs')

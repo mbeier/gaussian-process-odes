@@ -34,7 +34,7 @@ def initialize_inducing(model, data_ys, ts_max, data_noise=1e-1):
         Kxz = model.flow.odefunc.diffeq.kern.K(data_ys, inducing_loc)  # (N,M) or (D,N,M)
         Kzz = model.flow.odefunc.diffeq.kern.K(inducing_loc)  # (M,M) or (D,M,M)
         Lxx = torch.cholesky(Kxx + torch.eye(Kxx.shape[1]) * data_noise)  # (N,N) or (D,N,N)
-        Lzz = torch.cholesky(Kzz + torch.eye(Kzz.shape[1]) * 1e-6)  # (M,M) or (D,M,M)
+        Lzz = torch.cholesky(Kzz + torch.eye(Kzz.shape[1]) * 1e-4 * Kzz.shape[0])  # (M,M) or (D,M,M)
 
         if not model.flow.odefunc.diffeq.dimwise:
             alpha = torch.triangular_solve(f_xt, Lxx, upper=False)[0]  # (N,D)
